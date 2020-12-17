@@ -1,0 +1,2 @@
+# JannenProjektit
+Ensimmäinen oma repositoryni.
