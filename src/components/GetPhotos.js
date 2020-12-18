@@ -32,9 +32,11 @@ export default class GetPhotos extends React.Component {
                 key={index}
               >
                 <figure>
-                  <a target="_parent" href={photo.url}>
-                    <img src={photo.thumbnailUrl} alt={photo.url} 
-                    onClick={() => this.setState({photoId: photo.id})} />
+                  <a
+                    target="_parent"
+                    href={photo.url}
+                  >
+                    <img src={photo.thumbnailUrl} alt={photo.url} />
                     {this.state.photoId === photo.id && (
                       <figcaption>{photo.title}</figcaption>
                     )}
