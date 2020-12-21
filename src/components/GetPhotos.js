@@ -1,49 +1,58 @@
-/* eslint-disable react/jsx-no-target-blank */
 import React from "react";
-import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default class GetPhotos extends React.Component {
-  state = {
-    photos: [],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      photos: [],
+      photoId: null,
+    };
+  }
 
-  componentDidMount() {
-    axios
-      .get(`http://jsonplaceholder.typicode.com/photos?_start=0&_limit=10`)
-      .then((res) => {
-        console.log("response: ", res);
-        this.setState({ photos: res.data });
-      });
+  handleClick(event, photo) {
+    event.preventDefault();
+    return this.setState({ photoId: photo.id });
   }
 
   render() {
     return (
-        <div class="container" style = {{ justifyContent: "center", marginTop: "150px", display: "flex" }}>
-      <div class="row">
-        <div style={{ Width: "100vw", margin: "7px" }}>
-          {this.state.photos.map((photo, index) => {
-            return (
-              <div
-                style={{
-                  Width: "20%",
-                  margin: "8px",
-                  height: "auto",
-                  display: "inline-block",
-                  boxShadow: "5px 5px 5px black",
-                }}
-                key={index}
-              >
-                <a target="_parent" href={photo.url}>
-                  <img src={photo.thumbnailUrl} alt={photo.url} />
-                  {this.state.photoId === photo.id && (
-                    <figcaption>{photo.title}</figcaption>
-                  )}
-                </a>
-              </div>
-            );
-          })}
+      <div
+        className="container"
+        style={{
+          justifyContent: "center",
+          marginTop: "150px",
+          display: "flex",
+        }}
+      >
+        <div className="row">
+          <div style={{ Width: "100vw", margin: "7px" }}>
+            {this.props.photos.map((photo, index) => {
+              return (
+                <Link to={`/photo/${photo.id}`} key={photo.id}>
+                  <div
+                    style={{
+                      Width: "20%",
+                      margin: "8px",
+                      height: "auto",
+                      display: "inline-block",
+                      boxShadow: "5px 5px 5px black",
+                    }}
+                    key={index}
+                    /* onClick={(event) => this.handleClick(event, photo)} */
+                  >
+                    {/* <a target="_parent" href={photo.url}> */}
+                    <img src={photo.thumbnailUrl} alt={photo.url} />
+                    {/* {this.state.photoId === photo.id && (
+                        <figcaption>{photo.title}</figcaption>
+                      )} */}
+                    {/* </a> */}
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
         </div>
-      </div>
       </div>
     );
   }
