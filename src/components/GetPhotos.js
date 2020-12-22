@@ -39,14 +39,8 @@ export default class GetPhotos extends React.Component {
                       boxShadow: "5px 5px 5px black",
                     }}
                     key={index}
-                    /* onClick={(event) => this.handleClick(event, photo)} */
                   >
-                    {/* <a target="_parent" href={photo.url}> */}
                     <img src={photo.thumbnailUrl} alt={photo.url} />
-                    {/* {this.state.photoId === photo.id && (
-                        <figcaption>{photo.title}</figcaption>
-                      )} */}
-                    {/* </a> */}
                   </div>
                 </Link>
               );
